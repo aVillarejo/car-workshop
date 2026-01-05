@@ -1,0 +1,5 @@
+/* stylelint-disable-next-line at-rule-no-unknown */
+
+@theme {
+  --color-brand: rgb(227, 233, 53);
+}
