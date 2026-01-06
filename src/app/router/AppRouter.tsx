@@ -1,16 +1,16 @@
 import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router'
 
+import { useIsAuthenticated } from '@/shared/stores/useAuthStore'
 import { PageLoader } from '@/shared/components/ui/PageLoader';
+import { ProtectedRoute } from '@/shared/components/ProtectedRoute';
+
+const LoginPage = lazy(() => import('@/features/auth/pages/Login'))
+const WorkShopDashboard = lazy(() => import('@/features/workshop/pages/Dashboard'))
+const ClientDashboard = lazy(() => import('@/features/client/pages/Dashboard'))
 
 const AppRouter = () => {
-  const isAuthenticated = false
-
-  const LoginPage = lazy(() => import('@/features/auth/pages/Login'))
-  const WorkShopDashboard = lazy(() => import('@/features/workshop/pages/Dashboard'))
-  const ClientDashboard = lazy(() => import('@/features/client/pages/Dashboard'))
-
-
+  const isAuthenticated = useIsAuthenticated()
 
   return (
     <BrowserRouter>
@@ -20,8 +20,20 @@ const AppRouter = () => {
             path="/"
             element={isAuthenticated ? <Navigate to="/taller" replace /> : <LoginPage />}
           />
-          <Route path="/taller" element={<WorkShopDashboard />} />
-          <Route path="/cliente" element={<ClientDashboard />} />
+
+          <Route path="/taller" element={<ProtectedRoute requiredRole="TALLER" />}>
+            <Route index element={<Navigate to="ordenes" replace />} />
+            <Route path='ordenes' index element={<WorkShopDashboard  />} />
+            <Route path="ordenes/nueva" element={<WorkShopDashboard  />} />
+            <Route path="ordenes/:id" element={<WorkShopDashboard  />} />
+          </Route>
+
+          <Route path="/cliente" element={<ProtectedRoute requiredRole="CLIENTE" />}>
+            <Route index element={<Navigate to="ordenes" replace />} />
+            <Route path="ordenes" element={<ClientDashboard />} />
+            <Route path="ordenes/:id" element={<ClientDashboard />} />
+            <Route path="solicitar" element={<ClientDashboard />} />
+          </Route>
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

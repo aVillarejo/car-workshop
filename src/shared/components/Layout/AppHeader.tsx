@@ -1,6 +1,7 @@
 import { type ReactNode } from 'react'
 import { Menu, LogOut, User } from "lucide-react"
 
+import { useUser, useAuthActions } from '@/shared/stores/useAuthStore'
 import { Button } from "@/shared/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/shared/components/ui/sheet"
 
@@ -12,38 +13,38 @@ interface AppHeaderProps {
 }
 
 const AppHeader = ({ title, subtitle, icon, onLogout }: AppHeaderProps) => {
-  
-  const mockUser = { name: 'Juan Pérez', role: 'TALLER' }
+  const user = useUser()
+  const { logout } = useAuthActions()
 
   const handleLogout = () => {
-
+    logout()
     onLogout?.()
   }
 
   return (
-    <header className="top-0 z-30 sticky bg-white shadow-sm border-gray-200 border-b">
-      <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <div className="flex justify-between items-center gap-4 py-4">
-          <div className="flex items-center gap-3 min-w-0">
+    <header className="sticky top-0 z-30 bg-white border-b border-gray-200 shadow-sm">
+      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div className="flex gap-4 justify-between items-center py-4">
+          <div className="flex gap-3 items-center min-w-0">
             {icon && (
-              <div className="flex justify-center items-center bg-primary rounded-lg w-10 h-10 shrink-0">
+              <div className="flex justify-center items-center w-10 h-10 rounded-lg bg-primary shrink-0">
                 {icon}
               </div>
             )}
             <div className="min-w-0">
-              <h1 className="font-bold text-gray-900 text-xl sm:text-2xl truncate">
+              <h1 className="text-xl font-bold text-gray-900 truncate sm:text-2xl">
                 {title}
               </h1>
               {subtitle && (
-                <p className="text-gray-600 text-sm truncate">{subtitle}</p>
+                <p className="text-sm text-gray-600 truncate">{subtitle}</p>
               )}
             </div>
           </div>
 
-          <div className="hidden sm:flex items-center gap-4">
+          <div className="hidden gap-4 items-center sm:flex">
             <div className="text-right">
-              <p className="font-medium text-gray-900 text-sm">{mockUser?.name}</p>
-              <p className="text-gray-500 text-xs uppercase">{mockUser?.role}</p>
+              <p className="text-sm font-medium text-gray-900">{user?.name}</p>
+              <p className="text-xs text-gray-500 uppercase">{user?.role}</p>
             </div>
             <Button
               variant="outline"
@@ -69,27 +70,27 @@ const AppHeader = ({ title, subtitle, icon, onLogout }: AppHeaderProps) => {
                   <SheetTitle>Menú</SheetTitle>
                 </SheetHeader>
                 <div className="space-y-2">
-                  <div className="mb-6 py-4 border-gray-200 border-t border-b">
-                  <div className="flex items-center gap-3 p-3 rounded-lg">
-                    <div className="flex justify-center items-center bg-blue-100 rounded-full w-10 h-10">
+                  <div className="py-4 mb-6 border-t border-b border-gray-200">
+                  <div className="flex gap-3 items-center p-3 rounded-lg">
+                    <div className="flex justify-center items-center w-10 h-10 bg-blue-100 rounded-full">
                       <User className="w-5 h-5 text-blue-600" />
                     </div>
                     <div>
-                      <p className="font-medium text-gray-900">{mockUser?.name}</p>
-                      <p className="text-gray-500 text-xs capitalize">{mockUser?.role}</p>
+                      <p className="text-sm font-medium text-gray-900">{user?.name}</p>
+                      <p className="text-xs text-gray-500 capitalize">{user?.role}</p>
                     </div>
                   </div>
                   </div>
                   <Button
                     variant="ghost"
-                    className="justify-start hover:bg-red-50 w-full text-red-600 hover:text-red-700"
+                    className="justify-start w-full text-red-600 hover:bg-red-50 hover:text-red-700"
                   >
                     <LogOut className="mr-2 w-4 h-4" />
                     Cerrar sesión
                   </Button>
                 </div>
-                <div className="right-4 bottom-4 left-4 absolute p-4 border-t text-center">
-                  <p className="text-gray-500 text-xs">Taller de Gestión de Reparaciones</p>
+                <div className="absolute right-4 bottom-4 left-4 p-4 text-center border-t">
+                  <p className="text-xs text-gray-500">Taller de Gestión de Reparaciones</p>
                 </div>
               </SheetContent>
             </Sheet>
