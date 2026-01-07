@@ -9,6 +9,7 @@ const LoginPage = lazy(() => import('@/features/auth/pages/Login'))
 
 const WorkShopDashboard = lazy(() => import('@/features/workshop/pages/Dashboard'))
 const WorkShopOrderDetail = lazy(() => import('@/features/workshop/pages/OderDetail'))
+const WorkShopNewOrder = lazy(() => import('@/features/workshop/pages/NewOrder.tsx'))
 
 const ClientDashboard = lazy(() => import('@/features/client/pages/Dashboard'))
 
@@ -27,8 +28,9 @@ const AppRouter = () => {
           <Route path="/taller" element={<ProtectedRoute requiredRole="TALLER" />}>
             <Route index element={<Navigate to="ordenes" replace />} />
             <Route path='ordenes' index element={<WorkShopDashboard  />} />
-            <Route path="ordenes/nueva" element={<WorkShopDashboard  />} />
+            <Route path="ordenes/nueva" element={<WorkShopNewOrder  />} />
             <Route path="ordenes/:id" element={<WorkShopOrderDetail  />} />
+            
           </Route>
 
           <Route path="/cliente" element={<ProtectedRoute requiredRole="CLIENTE" />}>
