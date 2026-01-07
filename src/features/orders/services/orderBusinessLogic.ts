@@ -126,6 +126,9 @@ export class OrderBusinessLogic {
     return { valid: true, errors: [] }
   }
 
+  static getValidTransitions(order: RepairOrder): OrderStatus[] {
+    return VALID_TRANSITIONS[order.status] || []
+  }
 
   static createEvent(
     orderId: string,

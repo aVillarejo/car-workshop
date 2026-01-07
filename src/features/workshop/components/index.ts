@@ -1,2 +1,6 @@
+export { OrderInfoCard } from './OrderInfoCard'
+export { AmountsCard } from './AmountsCard'
+export { ServicesCard } from './ServicesCard'
+export { ActionsCard } from './ActionsCard'
 export { WorkshopOrdersTable } from './WorkshopOrdersTable'
 export { WorkshopOrdersCards } from './WorkshopOrdersCards'

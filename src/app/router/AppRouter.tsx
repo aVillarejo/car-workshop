@@ -6,7 +6,10 @@ import { PageLoader } from '@/shared/components/ui/PageLoader';
 import { ProtectedRoute } from '@/shared/components/ProtectedRoute';
 
 const LoginPage = lazy(() => import('@/features/auth/pages/Login'))
+
 const WorkShopDashboard = lazy(() => import('@/features/workshop/pages/Dashboard'))
+const WorkShopOrderDetail = lazy(() => import('@/features/workshop/pages/OderDetail'))
+
 const ClientDashboard = lazy(() => import('@/features/client/pages/Dashboard'))
 
 const AppRouter = () => {
@@ -25,7 +28,7 @@ const AppRouter = () => {
             <Route index element={<Navigate to="ordenes" replace />} />
             <Route path='ordenes' index element={<WorkShopDashboard  />} />
             <Route path="ordenes/nueva" element={<WorkShopDashboard  />} />
-            <Route path="ordenes/:id" element={<WorkShopDashboard  />} />
+            <Route path="ordenes/:id" element={<WorkShopOrderDetail  />} />
           </Route>
 
           <Route path="/cliente" element={<ProtectedRoute requiredRole="CLIENTE" />}>
