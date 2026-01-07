@@ -6,7 +6,7 @@ function Table({ className, ...props }: React.ComponentProps<"table">) {
   return (
     <div
       data-slot="table-container"
-      className="overflow-x-auto relative w-full"
+      className="relative w-full overflow-x-auto"
     >
       <table
         data-slot="table"
@@ -81,7 +81,7 @@ function TableCell({ className, ...props }: React.ComponentProps<"td">) {
     <td
       data-slot="table-cell"
       className={cn(
-        "py-6 px-4 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [*>[role=checkbox]]:translate-y-0.5",
+        "px-6 py-4 align-middle text-sm whitespace-nowrap [&:has([role=checkbox])]:pr-0 [*>[role=checkbox]]:translate-y-0.5",
         className
       )}
       {...props}
@@ -96,7 +96,7 @@ function TableCaption({
   return (
     <caption
       data-slot="table-caption"
-      className={cn("mt-4 text-sm text-muted-foreground", className)}
+      className={cn("mt-4 text-muted-foreground text-sm", className)}
       {...props}
     />
   )
