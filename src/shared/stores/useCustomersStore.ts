@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
+import { useShallow } from 'zustand/shallow'
 
 export interface Customer {
   id: string
@@ -140,18 +141,22 @@ export const useCustomers = () => useCustomersStore((state) => state.customers)
 export const useVehicles = () => useCustomersStore((state) => state.vehicles)
 
 export const useCustomersActions = () =>
-  useCustomersStore((state) => ({
+  useCustomersStore(
+    useShallow((state) => ({
     addCustomer: state.addCustomer,
     updateCustomer: state.updateCustomer,
     setCustomers: state.setCustomers,
-  }))
+  })))
 
 export const useVehiclesActions = () =>
-  useCustomersStore((state) => ({
+  useCustomersStore(
+  useShallow(
+    (state) => ({
     addVehicle: state.addVehicle,
     updateVehicle: state.updateVehicle,
     setVehicles: state.setVehicles,
-  }))
+    }))
+  )
 
 export const useCustomerVehicles = (customerId: string | undefined) =>
   useCustomersStore((state) =>

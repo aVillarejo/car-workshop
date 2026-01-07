@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
+import { useShallow } from 'zustand/shallow'
 
 import type { RepairOrder, OrderStatus } from '../types'
 
@@ -101,12 +102,14 @@ export const useOrdersLoading = () => useOrdersStore((state) => state.isLoading)
 export const useOrdersError = () => useOrdersStore((state) => state.error)
 
 export const useOrdersActions = () =>
-  useOrdersStore((state) => ({
-    addOrder: state.addOrder,
-    updateOrder: state.updateOrder,
-    deleteOrder: state.deleteOrder,
-    setOrders: state.setOrders,
-  }))
+  useOrdersStore(
+    useShallow((state) => ({
+      addOrder: state.addOrder,
+      updateOrder: state.updateOrder,
+      deleteOrder: state.deleteOrder,
+      setOrders: state.setOrders,
+    }))
+  )
 
 export const useCustomerOrders = (customerId: string | undefined) =>
   useOrdersStore((state) =>
