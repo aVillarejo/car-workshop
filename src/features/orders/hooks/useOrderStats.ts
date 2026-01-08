@@ -10,6 +10,9 @@ export function useOrderStats(orders: RepairOrder[]) {
       pending: orders.filter((o) => o.status === OrderStatus.DIAGNOSED).length,
       inProgress: orders.filter((o) => o.status === OrderStatus.IN_PROGRESS).length,
       waitingApproval: orders.filter((o) => o.status === OrderStatus.WAITING_FOR_APPROVAL).length,
+      authorized: orders.filter((o) => o.status === OrderStatus.AUTHORIZED).length,
+      completed: orders.filter((o) => o.status === OrderStatus.COMPLETED).length,
+      delivered: orders.filter((o) => o.status === OrderStatus.DELIVERED).length,
     }
   }, [orders])
 

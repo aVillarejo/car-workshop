@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router'
 import { useOrders } from '@/features/orders/stores/useOrdersStore'
 import { useCustomers, useVehicles } from '@/shared/stores/useCustomersStore'
 import { useFormatters } from '@/shared/lib/formatters'
+import { useOrderStats } from '@/features/orders/hooks/useOrderStats'
 
 import { useOrderFilters } from './useOrderFilters'
-import { useOrderStats } from './useOrderStats'
 import { useOrderHelpers } from './useOrderHelpers'
 import type { StatItem } from '@/features/orders/components/shared'
 

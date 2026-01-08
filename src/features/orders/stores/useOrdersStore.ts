@@ -112,11 +112,12 @@ export const useOrdersActions = () =>
   )
 
 export const useCustomerOrders = (customerId: string | undefined) =>
-  useOrdersStore((state) =>
+  useOrdersStore(
+    useShallow((state) =>
     customerId
       ? state.orders.filter((order) => order.customerId === customerId)
       : []
-  )
+  ))
 
 export const useOrdersStats = () =>
   useOrdersStore((state) => {
