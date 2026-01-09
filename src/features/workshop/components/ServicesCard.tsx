@@ -20,6 +20,7 @@ interface ServicesCardProps {
   onAddComponent: (serviceId: string) => void
   onEditComponent: (service: Service, componentId: string) => void
   onDeleteComponent: (serviceId: string, componentId: string) => void
+  isClientView?: boolean
 }
 
 export function ServicesCard({
@@ -31,6 +32,7 @@ export function ServicesCard({
   onAddComponent,
   onEditComponent,
   onDeleteComponent,
+  isClientView = false,
 }: ServicesCardProps) {
   return (
     <Card className="p-4 sm:p-6">
@@ -102,12 +104,16 @@ export function ServicesCard({
 
               <div className="gap-3 grid grid-cols-1 sm:grid-cols-2 mt-4 text-sm">
                 <div>
-                  <span className="text-gray-600">Mano de obra est.:</span>
+                  <span className="text-gray-600">Mano de obra {!isClientView && 'estimada'}:</span>
                   <span className="ml-2 font-medium text-gray-900">{formatCurrency(service.laborEstimated)}</span>
                 </div>
                 <div>
-                  <span className="text-gray-600">Mano de obra real:</span>
-                  <span className="ml-2 font-medium text-gray-900">{formatCurrency(service.laborReal)}</span>
+                  {!isClientView && (
+                    <>
+                      <span className="text-gray-600">Mano de obra real:</span>
+                      <span className="ml-2 font-medium text-gray-900">{formatCurrency(service.laborReal)}</span>
+                    </>
+                  )}
                 </div>
               </div>
 
@@ -128,8 +134,8 @@ export function ServicesCard({
                         </div>
                         <div className="flex sm:flex-row flex-col items-stretch sm:items-center gap-3">
                           <div className="sm:text-right">
-                            <p className="text-gray-600 text-xs">Estimado: {formatCurrency(component.estimated)}</p>
-                            <p className="mt-1 font-medium text-gray-900 text-xs">Real: {formatCurrency(component.real)}</p>
+                            <p className={`text-gray-600 text-xs ${isClientView ? 'font-medium text-gray-900 mt-1' : null}`}>{!isClientView && 'Estimado:'} {formatCurrency(component.estimated)}</p>
+                            {isClientView ? null : <p className="mt-1 font-medium text-gray-900 text-xs">Real: {formatCurrency(component.real)}</p>}
                           </div>
                           {canModifyServices && (
                             <DropdownMenu>

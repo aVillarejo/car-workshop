@@ -9,9 +9,10 @@ const LoginPage = lazy(() => import('@/features/auth/pages/Login'))
 
 const WorkShopDashboard = lazy(() => import('@/features/workshop/pages/Dashboard'))
 const WorkShopOrderDetail = lazy(() => import('@/features/workshop/pages/OderDetail'))
-const WorkShopNewOrder = lazy(() => import('@/features/workshop/pages/NewOrder.tsx'))
+const WorkShopNewOrder = lazy(() => import('@/features/workshop/pages/NewOrder'))
 
 const ClientDashboard = lazy(() => import('@/features/client/pages/Dashboard'))
+const ClientOrderDetail = lazy(() => import('@/features/client/pages/OrderDetail'))
 
 const AppRouter = () => {
   const isAuthenticated = useIsAuthenticated()
@@ -36,7 +37,7 @@ const AppRouter = () => {
           <Route path="/cliente" element={<ProtectedRoute requiredRole="CLIENTE" />}>
             <Route index element={<Navigate to="ordenes" replace />} />
             <Route path="ordenes" element={<ClientDashboard />} />
-            <Route path="ordenes/:id" element={<ClientDashboard />} />
+            <Route path="ordenes/:id" element={<ClientOrderDetail />} />
             <Route path="solicitar" element={<ClientDashboard />} />
           </Route>
 

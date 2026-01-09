@@ -155,6 +155,7 @@ export const useVehiclesActions = () =>
     addVehicle: state.addVehicle,
     updateVehicle: state.updateVehicle,
     setVehicles: state.setVehicles,
+    getVehicleById: state.getVehicleById,
     }))
   )
 
