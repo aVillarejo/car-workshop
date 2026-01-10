@@ -46,7 +46,7 @@ export function useClientDashboard() {
   }, [navigate])
 
   const handleCreateOrder = useCallback(() => {
-    navigate('/cliente/solicitar')
+    navigate('/cliente/ordenes/solicitar')
   }, [navigate])
 
   const handleViewDetail = useCallback(

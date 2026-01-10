@@ -13,6 +13,7 @@ const WorkShopNewOrder = lazy(() => import('@/features/workshop/pages/NewOrder')
 
 const ClientDashboard = lazy(() => import('@/features/client/pages/Dashboard'))
 const ClientOrderDetail = lazy(() => import('@/features/client/pages/OrderDetail'))
+const ClientNewOrder = lazy(() => import('@/features/client/pages/NewOrder'))
 
 const AppRouter = () => {
   const isAuthenticated = useIsAuthenticated()
@@ -38,7 +39,7 @@ const AppRouter = () => {
             <Route index element={<Navigate to="ordenes" replace />} />
             <Route path="ordenes" element={<ClientDashboard />} />
             <Route path="ordenes/:id" element={<ClientOrderDetail />} />
-            <Route path="solicitar" element={<ClientDashboard />} />
+            <Route path="ordenes/solicitar" element={<ClientNewOrder />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/" replace />} />

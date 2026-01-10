@@ -1,3 +1,6 @@
 export { ClientOrdersList } from './ClientOrdersList'
 export { ServiceInfoCard } from './ServiceInfoCard'
 export { OrderActions } from './OrderActions'
+export { NewOrderInfoCard } from './NewOrderInfoCard'
+export { VehicleSelector } from './VehicleSelector'
+export { NewOrderForm } from './NewOrderForm'
