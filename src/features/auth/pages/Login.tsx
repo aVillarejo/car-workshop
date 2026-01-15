@@ -15,7 +15,7 @@ export default function LoginPage() {
   } = useLoginFlow()
 
   return (
-    <div className="flex justify-center items-center p-4 min-h-screen bg-gray-50">
+    <div className="flex justify-center sm:items-center bg-gray-50 p-4 min-h-screen">
       <div className="px-4 w-full max-w-md text-center">
         <LoginHeader />
         
